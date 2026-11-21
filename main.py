@@ -10,7 +10,7 @@ import math
 import os
 from PIL import Image, ImageDraw, ImageFont
 
-OUT = "/output/entry.png"
+OUT = os.path.join(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"), "entry.png")
 W, H = 1024, 1024
 
 SERIF = "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf"
@@ -307,6 +307,7 @@ def main():
          anchor="ra")
 
     os.makedirs("/output", exist_ok=True)
+    os.makedirs(os.path.dirname(OUT), exist_ok=True)
     img.save(OUT, "PNG", optimize=True)
     print("wrote", OUT, img.size, os.path.getsize(OUT), "bytes")
 
